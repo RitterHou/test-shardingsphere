@@ -3,6 +3,7 @@ package com.nosuchfield.model;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -10,14 +11,14 @@ public class Order {
 
     private String orderId;
 
-    private String userId;
+    private Long userId;
 
     private BigDecimal totalPrice;
 
-    private int status;
+    private int state;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 }
