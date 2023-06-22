@@ -1,7 +1,7 @@
-package com.nosuchfield;
+package com.nosuchfield.shardingsphere;
 
-import com.nosuchfield.mapper.OrderMapper;
-import com.nosuchfield.model.Order;
+import com.nosuchfield.shardingsphere.mapper.OrderMapper;
+import com.nosuchfield.shardingsphere.model.Order;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,10 +15,10 @@ public class OrderMapperTest extends BaseTest {
 
     @Test
     public void testInsert() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) {
             Order order = new Order();
+            order.setOrderId("66666666666");
             order.setUserId(1L);
-            order.setState(0);
             order.setTotalPrice(new BigDecimal((i + 1) * 5));
             order.setCreateTime(LocalDateTime.now());
             order.setUpdateTime(order.getCreateTime());

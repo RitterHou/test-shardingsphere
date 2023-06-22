@@ -1,4 +1,4 @@
-package com.nosuchfield;
+package com.nosuchfield.shardingsphere;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

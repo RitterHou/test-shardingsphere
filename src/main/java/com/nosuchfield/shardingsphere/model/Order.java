@@ -1,4 +1,4 @@
-package com.nosuchfield.model;
+package com.nosuchfield.shardingsphere.model;
 
 import lombok.Data;
 
@@ -9,13 +9,13 @@ import java.util.Date;
 @Data
 public class Order {
 
+    private String id;
+
     private String orderId;
 
     private Long userId;
 
     private BigDecimal totalPrice;
-
-    private int state;
 
     private LocalDateTime createTime;
 

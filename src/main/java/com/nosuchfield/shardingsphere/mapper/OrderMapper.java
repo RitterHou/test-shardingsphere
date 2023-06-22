@@ -1,6 +1,6 @@
-package com.nosuchfield.mapper;
+package com.nosuchfield.shardingsphere.mapper;
 
-import com.nosuchfield.model.Order;
+import com.nosuchfield.shardingsphere.model.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

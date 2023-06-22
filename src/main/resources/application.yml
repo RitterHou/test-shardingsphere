@@ -1,44 +1,11 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:10011/test
-    username: root
-    password: 1234
-    driver-class-name=com: com.mysql.cj.jdbc.Driver
+    url: jdbc:shardingsphere:classpath:shardingsphere/config.yaml
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
   application:
-    name: sharding-jdbc
-  shardingsphere:
-    datasource:
-      mysql_1:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:10011/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
-        password: 1234
-        type: com.zaxxer.hikari.HikariDataSource
-        username: root
-      names: mysql_1
-    enabled: true # shardingsphere 配置开关，如果使用 java api 配置方式，需要修改为 false
-    props:
-      sql:
-        show: true # 打开 sql 输出日志
-    sharding:
-      tables:
-        t_order: # 逻辑表名
-          actual-data-nodes: mysql_1.t_order_$->{1..2} # 真实表名
-          key-generator: # order_id的生成策略为snow flake
-            column: order_id
-            type: SNOWFLAKE
-          table-strategy:
-            inline:
-              # 分表的方式按order_id来进行路由选择，通过order_id生成目标表名
-              sharding-column: order_id
-              algorithm-expression: t_order_$->{order_id%2+1}
+    name: ShardingSphere
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
-
-logging:
-  level:
-    com.light.sharding.jdbc: debug
-    org.springframework.web: info
-    root: info
