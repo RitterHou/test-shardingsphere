@@ -2,12 +2,15 @@ package com.nosuchfield.shardingsphere;
 
 import com.nosuchfield.shardingsphere.mapper.OrderMapper;
 import com.nosuchfield.shardingsphere.model.Order;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Slf4j
 public class OrderMapperTest extends BaseTest {
 
     @Autowired
@@ -24,6 +27,12 @@ public class OrderMapperTest extends BaseTest {
             order.setUpdateTime(order.getCreateTime());
             this.orderMapper.insert(order);
         }
+    }
+
+    @Test
+    public void testQueryAll() {
+        List<Order> orders = orderMapper.getAllOrders();
+        orders.forEach(order -> log.info(order.toString()));
     }
 
 }
