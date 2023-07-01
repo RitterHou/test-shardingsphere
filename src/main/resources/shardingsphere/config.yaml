@@ -63,18 +63,19 @@ rules:
     keyGenerators:
       snowflake:
         type: SNOWFLAKE
-  - !READWRITE_SPLITTING
-    dataSources:
-      readwrite_ds:
-        staticStrategy:
-          writeDataSourceName: ds_0
-          readDataSourceNames:
-            - ds_1
-            - ds_2
-        loadBalancerName: random
-    loadBalancers:
-      random:
-        type: RANDOM
+  # 影响查询结果，临时注释掉
+  #  - !READWRITE_SPLITTING
+  #    dataSources:
+  #      readwrite_ds:
+  #        staticStrategy:
+  #          writeDataSourceName: ds_0
+  #          readDataSourceNames:
+  #            - ds_1
+  #            - ds_2
+  #        loadBalancerName: random
+  #    loadBalancers:
+  #      random:
+  #        type: RANDOM
   - !MASK
     tables:
       t_user:
@@ -92,5 +93,23 @@ rules:
           first-n: 3
           last-m: 4
           replace-char: '*'
+  - !ENCRYPT
+    tables:
+      t_member:
+        columns:
+          name:
+            cipherColumn: name
+            encryptorName: name_encryptor
+          password:
+            cipherColumn: password
+            encryptorName: pwd_encryptor
+        queryWithCipherColumn: true
+    encryptors:
+      name_encryptor:
+        type: AES
+        props:
+          aes-key-value: 123abc
+      pwd_encryptor:
+        type: MD5
 props:
   sql-show: true
