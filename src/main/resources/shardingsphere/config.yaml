@@ -63,5 +63,34 @@ rules:
     keyGenerators:
       snowflake:
         type: SNOWFLAKE
+  - !READWRITE_SPLITTING
+    dataSources:
+      readwrite_ds:
+        staticStrategy:
+          writeDataSourceName: ds_0
+          readDataSourceNames:
+            - ds_1
+            - ds_2
+        loadBalancerName: random
+    loadBalancers:
+      random:
+        type: RANDOM
+  - !MASK
+    tables:
+      t_user:
+        columns:
+          id:
+            maskAlgorithm: md5_mask
+          phone:
+            maskAlgorithm: keep_first_n_last_m_mask
+    maskAlgorithms:
+      md5_mask:
+        type: MD5
+      keep_first_n_last_m_mask:
+        type: KEEP_FIRST_N_LAST_M
+        props:
+          first-n: 3
+          last-m: 4
+          replace-char: '*'
 props:
   sql-show: true
