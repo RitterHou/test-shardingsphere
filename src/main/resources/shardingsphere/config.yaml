@@ -111,5 +111,7 @@ rules:
           aes-key-value: 123abc
       pwd_encryptor:
         type: MD5
+        props:
+          salt: nosuchfield
 props:
   sql-show: true
